@@ -1,0 +1,67 @@
+   <style>
+        /* Specify styling for tooltip contents */
+        .tooltip.customClass .tooltip-inner {
+          color: #880000;
+		  
+		  max-width: 350px;
+			/* If max-width does not work, try using width instead */
+		  width: 350px; 
+		  
+          background-color: #ffff66;
+          box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+		
+		.verse{ 
+		  width:50%;
+		  min-width:330px;
+		  float:left;
+		  /*border: 3px solid #73AD21;*/
+		}
+		.verseNumber{
+		  /*border: 3px solid #73AD21;*/
+		}
+		
+		.frqMore20 {
+		  background-color: #FF5733;
+		}
+		
+		.frqMore5 {
+		  background-color: #FFBB33;
+		}
+		.control{
+		  height:60px;
+		  width:300px;
+		  position: fixed;
+		  bottom: 10px;
+		  right: 10%;
+		  background-color: #B1F4F0;
+		  padding: 5px;
+		}
+		
+        /* Hide arrow 
+        .tooltip.customClass .tooltip-arrow {
+          display: none;
+        }*/
+     </style>
+	  
+<div class="row marketing">
+  <button type="button" class="btn btn-warning" ng-click="segment()">Segment</button>
+  <div class="control">	
+	<p>Show frequent (>5)<input type="checkbox" ng-model="frqMore5"></p>
+	<p>Show most frequent (>20)<input type="checkbox" ng-model="frqMore20"></p>
+  </div>
+  <!--div>{{bookSegmentedJSON}}</div-->
+  <h4>Book {{book.id}}</h4>
+   <p ng-repeat="line in bookSegmented.lines">
+	<span class="verseNumber"><strong>{{line.number}}</strong><span href="#" uib-tooltip="{{line.steadman.remark}}" tooltip-placement="right" tooltip-class="customClass" ng-show="line.steadman.remark">*</span></span>
+	<span class="verse">
+		<span class="{{getStyle(occ)}}" ng-repeat="occ in line.text" uib-tooltip="{{occ.entry.meaning}}" 
+		tooltip-placement="top" tooltip-class="customClass">{{occ.text}} </span>
+	</span>
+</p>  
+  <!--p ng-repeat="line in book.lines | orderBy:'line.number'">
+    {{line.text[0]}} <strong>{{line.number}}</strong>
+	<span href="#" uib-tooltip="{{line.steadman.remark}}" tooltip-placement="right" 
+						tooltip-class="customClass" ng-show="line.steadman.remark">*</span>
+  </p-->  
+</div>
